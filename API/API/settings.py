@@ -37,8 +37,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'rest_framework',
+    'rest_framework',
+    'logistics_api',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,10 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-REST_FRAMEWORK = (
-   # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    #'PAGE_SIZE': 10
-)
+
 
 ROOT_URLCONF = 'API.urls'
 
@@ -80,10 +83,11 @@ WSGI_APPLICATION = 'API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
+#Everyone must create a database in the local PCs using the name 'Logistics'
+#Everyone must change the password of the root to 'logistics'
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Logistics',
         'HOST': '127.0.0.1',
@@ -91,19 +95,8 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'logistics',
     }
-
 }
 
-#'ENGINE': 'django.db.backends.mysql',
-  #      'USER' : '',
-  #      'NAME' : '',
-        
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-# }
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

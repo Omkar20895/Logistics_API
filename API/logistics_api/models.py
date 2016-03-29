@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .titles import mapping
+#from .titles import mapping
 from time import time
 from django.forms import ModelForm
 
@@ -12,7 +12,7 @@ class Orders(models.Model):
 	order_status = models.CharField(max_length=10)
 	trip_id = models.CharField(max_length=10)
 	quantity = models.CharField(max_length=10)
-	source = models.CharFiels(max_length=360)#check this once!
+	source = models.CharField(max_length=360)#check this once!
 	destination = models.CharField(max_length=360)
 	date = models.DateTimeField(db_index=True, auto_now_add=True)
 	contact_num = models.CharField(max_length=30)
@@ -21,21 +21,22 @@ class User(models.Model):
 	user_id = models.CharField(max_length=100, primary_key=True)
 	name = models.CharField(max_length=50)
 
+class Truck(models.Model):
+	truck_id = models.CharField(max_length=20, primary_key=True)
+	truck_capacity = models.CharField(max_length=20)
+	remaining_capacity = models.CharField(max_length=10)
+
 class Trip(models.Model):
 	trip_id = models.CharField(max_length=20, primary_key=True)
 	trip_capacity = models.CharField(max_length=20)
-	waypoint = models.CharField(max_length=360*360)#check this once!
+	waypoint = models.CharField(max_length=360*100)#check this once!
 	location = models.CharField(max_length=360)
 	user_id = models.ForeignKey(User)
 	order_id = models.ForeignKey(Orders)
 	truck_id = models.ForeignKey(Truck)
 
-class driver(models.Model):
+class Driver(models.Model):
 	driver_id = models.CharField(max_length=30, primary_key=True)
 	password = models.CharField(max_length=20)
 	#attendance = models.CharField(max_length=30)
 
-class Truck(models.Model):
-	truck_id = models.CharField(max_length=20, primary_key=True)
-	truck_capacity = models.CharField(max_length=20)
-	remaining_capacity = models.CharField(max_length=10)

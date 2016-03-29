@@ -3,21 +3,29 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from tutorial.quickstart.serializers import UserSerializer, GroupSerializer
+from rest_framework import viewsets, generics
+from serializers import UserSerializer, OrdersSerializer, TruckSerializer, TripSerializer, DriverSerializer
+from models import Orders, User, Truck, Trip, Driver
 
 
-class UserViewSet(viewsets.ModelViewSet):
+
+'''class OrdersList(generics.ListCreateAPIView):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    queryset = Orders.objects.all()#.order_by('-date_joined')
+    serializer_class = OrdersSerializer
+
+class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Orders.objects.all()
+    serializer_class = OrdersSerializer'''
+
+class DriverList(generics.ListCreateAPIView):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+
+class DriverDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
