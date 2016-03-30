@@ -23,13 +23,13 @@ class User(models.Model):
 
 class Truck(models.Model):
 	truck_id = models.CharField(max_length=20, primary_key=True)
-	truck_capacity = models.CharField(max_length=20)
+	truck_capacity = models.IntegerField(default=0)
 	remaining_capacity = models.CharField(max_length=10)
 
 class Trip(models.Model):
 	trip_id = models.CharField(max_length=20, primary_key=True)
 	trip_capacity = models.CharField(max_length=20)
-	waypoint = models.CharField(max_length=360*100)#check this once!
+	waypoint = models.CharField(max_length=60)#check this once!
 	location = models.CharField(max_length=360)
 	user_id = models.ForeignKey(User)
 	order_id = models.ForeignKey(Orders)
