@@ -6,16 +6,16 @@ from django.forms import ModelForm
 
 # Create your models here.
 class Orders(models.Model):
-	order_id = models.CharField(max_length=10, primary_key = True)
+	order_id = models.IntegerField(default=0, primary_key = True)
 	user_id = models.ForeignKey(User)
 	goods_type = models.CharField(max_length=30)
 	order_status = models.CharField(max_length=10)
 	trip_id = models.CharField(max_length=10)
-	quantity = models.CharField(max_length=10)
+	quantity = models.Integer(default=0)
 	source = models.CharField(max_length=360)#check this once!
 	destination = models.CharField(max_length=360)
 	date = models.DateTimeField(db_index=True, auto_now_add=True)
-	contact_num = models.CharField(max_length=30)
+	contact_num = models.CharField(max_length=30)#review once
 
 class User(models.Model):
 	user_id = models.CharField(max_length=100, primary_key=True)
@@ -36,7 +36,8 @@ class Trip(models.Model):
 	truck_id = models.ForeignKey(Truck)
 
 class Driver(models.Model):
-	driver_id = models.CharField(max_length=30, primary_key=True)
+	name = models.CharField(max_length=30)
+	driver_id = models.IntegerField(default=0, primary_key=True)
 	password = models.CharField(max_length=20)
 	#attendance = models.CharField(max_length=30)
 
