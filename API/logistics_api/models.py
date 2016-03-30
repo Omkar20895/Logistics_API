@@ -11,7 +11,7 @@ class Orders(models.Model):
 	goods_type = models.CharField(max_length=30)
 	order_status = models.CharField(max_length=10)
 	trip_id = models.CharField(max_length=10)
-	quantity = models.Integer(default=0)
+	quantity = models.IntegerField(default=0)
 	source = models.CharField(max_length=360)#check this once!
 	destination = models.CharField(max_length=360)
 	date = models.DateTimeField(db_index=True, auto_now_add=True)

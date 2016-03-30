@@ -12,11 +12,22 @@ from rest_framework.response import Response
 
 
 
-class OrdersList(generics.ListCreateAPIView):
-    queryset = Orders.objects.all()#.order_by('-date_joined')
-    serializer_class = OrdersSerializer
+class OrdersList(APIView):
 
-class DriverList(APIView):#APIView):
+    def get(self, request, format=None):
+        orders = Orders.objects.all()
+        serializer = OrdersSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        queryset = Orders.objects.all()
+        serializer = OrdersSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DriverList(APIView):
     
     def get(self, request, format=None):
         drivers = Driver.objects.all()
@@ -31,25 +42,50 @@ class DriverList(APIView):#APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, *args, **kwargs):
-        request
-        queryset = driver.objects.filter()
 
+class TripList(APIView):
 
-'''class DriverDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Driver.objects.all()
-    serializer_class = DriverSerializer'''
+    def get(self, request, format=None):
+        trips = Trip.objects.all()
+        serializer = TripSerializer(trips, many=True)
+        return Response(serializer.data)
 
-class TripList(generics.ListCreateAPIView):
-    queryset = Trip.objects.all()#.order_by('-date_joined')
-    serializer_class = TripSerializer
+    def post(self, request, format=None):
+        queryset = Trip.objects.all()
+        serializer = TripSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class TruckList(generics.ListCreateAPIView):
-    queryset = Truck.objects.all()#.order_by('-date_joined')
-    serializer_class = TruckSerializer
+class TruckList(APIView):
+    
+    def get(self, request, format=None):
+        trucks = Truck.objects.all()
+        serializer = TruckSerializer(trucks, many=True)
+        return Response(serializer.data)
 
-class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()#.order_by('-date_joined')
-    serializer_class = UserSerializer
+    def post(self, request, format=None):
+        queryset = Truck.objects.all()
+        serializer = TruckSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserList(APIView):
+
+    def get(self, request, format=None):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        queryset = User.objects.all()
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
