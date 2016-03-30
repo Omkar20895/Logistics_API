@@ -32,7 +32,7 @@ class TripSerializer(serializers.HyperlinkedModelSerializer):
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Driver
-        fields = ('driver_id', 'password')
+        fields = ('driver_id', 'name', 'password')
 
 
 

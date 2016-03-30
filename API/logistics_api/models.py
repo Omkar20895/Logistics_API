@@ -36,8 +36,8 @@ class Trip(models.Model):
 	truck_id = models.ForeignKey(Truck)
 
 class Driver(models.Model):
-	name = models.CharField(max_length=30)
 	driver_id = models.IntegerField(default=0, primary_key=True)
+	name = models.CharField(max_length=30)
 	password = models.CharField(max_length=20)
 	#attendance = models.CharField(max_length=30)
 
